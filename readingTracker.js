@@ -10,15 +10,13 @@ const readingLog = [
 ];
 
 /**
- * Adds a new reading entry to the readingLog array.
- * Expected input types:
- * - day: string
- * - book: string
- * - minutes: number
- *
- * This function doesn't validate types, so wrong inputs (e.g., a string instead of number)
- * could break downstream logic like totalReadingMinutes().
- * Adding type validation or using TypeScript could make it safer.
+ * Adds a new reading entry to the reading log.
+ * Parameters:
+ *   - day: string (e.g., "Saturday")
+ *   - book: string (e.g., "Dune")
+ *   - minutes: number (e.g., 45)
+ * Side effect:
+ *   - Adds a new object to the global readingLog array.
  */
 function addReadBook(day, book, minutes) {
   const newEntry = { day, book, minutes };
@@ -26,14 +24,16 @@ function addReadBook(day, book, minutes) {
 }
 
 /**
- * Calculates the total minutes read across all entries in the log.
- * Input: log (array of reading entries)
- * Output: total number of minutes (number)
+ * Calculates total minutes read for the entire week.
+ * Parameter:
+ *   - log: array of reading entries (each with .minutes key)
+ * Returns:
+ *   - total number of reading minutes (number)
  */
 function totalReadingMinutes(log) {
   let total = 0;
 
-  // Loop through each entry and sum the minutes
+  // Accumulate minutes from each entry
   for (let entry of log) {
     total += entry.minutes;
   }
@@ -42,14 +42,16 @@ function totalReadingMinutes(log) {
 }
 
 /**
- * Determines the most frequently read book from the log.
- * Input: log (array of reading entries)
- * Output: title of the most read book (string)
+ * Finds the book read most frequently in the log.
+ * Parameter:
+ *   - log: array of reading entries
+ * Returns:
+ *   - book title (string) with highest frequency
  */
 function mostReadBook(log) {
-  const bookCounts = {}; // Object to count how many times each book appears
+  const bookCounts = {}; // Object to store book frequency
 
-  // Count occurrences of each book
+  // Count each book occurrence
   for (let entry of log) {
     if (!bookCounts[entry.book]) {
       bookCounts[entry.book] = 1;
@@ -58,7 +60,7 @@ function mostReadBook(log) {
     }
   }
 
-  // Determine which book has the highest count
+  // Find the book with the highest count
   let maxBook = null;
   let maxCount = 0;
   for (let book in bookCounts) {
@@ -72,25 +74,26 @@ function mostReadBook(log) {
 }
 
 /**
- * Prints a line-by-line summary of daily reading activity.
- * Input: log (array of reading entries)
- * Output: none (prints to console)
+ * Logs daily reading activity to the console.
+ * Parameter:
+ *   - log: array of reading entries
+ * Side effect:
+ *   - Prints each day's reading summary
  */
 function printDailySummary(log) {
-  // Loop through the log and format each entry as a summary
   for (let entry of log) {
     console.log(`${entry.day}: ${entry.minutes} mins reading "${entry.book}"`);
   }
 }
 
-// Test the addReadBook function with a new entry for Saturday
+// Add a new reading entry for Saturday
 addReadBook("Saturday", "Dune", 50);
 
-// Display all entries
+// Show reading summary
 printDailySummary(readingLog);
 
-// Show the total minutes read this week
+// Show total reading minutes
 console.log("Total minutes read:", totalReadingMinutes(readingLog));
 
-// Show the most frequently read book
+// Show most frequently read book
 console.log("Most read book:", mostReadBook(readingLog));
