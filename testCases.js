@@ -4,7 +4,6 @@ const {
   totalReadingMinutes,
   mostReadBook,
   printDailySummary,
-  sampleLog
 } = require("./readingTracker");
 
 // Initialize a fresh log for testing
