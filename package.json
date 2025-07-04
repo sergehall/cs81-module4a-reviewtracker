@@ -1,0 +1,12 @@
+{
+  "name": "cs81-module4a-reviewtracker",
+  "version": "1.0.0",
+  "description": "Reading tracker for CS81 Assignment 4A",
+  "main": "readingTracker.js",
+  "scripts": {
+    "start": "node runTracker.js",
+    "test": "node testCases.js",
+    "dev": "nodemon runTracker.js"
+  },
+  "license": "ISC"
+}
